@@ -67,6 +67,9 @@ Overview: http://www.mhthemes.com/dev_magazine/credits/
 Changelog
 ==================================
 
+=v.2.5.4 02-11-2016
+* shashi started modifying it whahaha 
+
 = v2.5.3 04-10-2016 =
 * Minor CSS adjustments
 * Moved theme links to theme options panel 
