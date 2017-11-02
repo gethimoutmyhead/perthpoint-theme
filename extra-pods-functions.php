@@ -222,21 +222,18 @@ www.perthpoint.com.au
         }
             if ($original_organiser_email){
                 //send an e-mail the event organizer encouraging them to join PerthPoint
-                $my_file = 'test.txt';
-                $handle = fopen($my_file,'w');
-                fwrite($handle, $original_organiser_email . " is happy");
 
                 $email = $host_email;
                 $subject = 'Your event - ' . $event_name . ' is featured on PerthPoint!';
                 $comment = 'Hey there,
     
-We wanted to let you know that your new event - ' . $event_name . ' - has been added to our website!
+We wanted to let you know that your new event - ' . $event_name . ' - has been chosen to feature on our website!
     
 View it here:' . $event_page . '
     
 Join us today on www.perthpoint.com.au/host-login to edit the event or add more events. It is totally free!
 
-Alternatively, we can take the event down and remove you from future correspondence, just e-mail us back.
+Feel free to contact us on this address if you are unhappy for any reason.
     
 Trisha
 www.perthpoint.com.au
