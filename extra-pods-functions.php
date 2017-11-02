@@ -182,6 +182,7 @@ function approve_event_email($pieces, $is_new_item, $id){
     
     $event_post_status = get_post_status($id); //$pieces[ 'fields' ][ 'post_status' ];
     
+    $original_organiser_email = $pieces['fields']['original_organiser_email']['value'];
     
     //$host_id = 'sizerp';
     
@@ -218,9 +219,35 @@ www.perthpoint.com.au
     
     ';
             mail($email, $subject, $comment, "From:" . 'admin@perthpoint.com.au');
+        }
+            if ($original_organiser_email){
+                //send an e-mail the event organizer encouraging them to join PerthPoint
+                $my_file = 'test.txt';
+                $handle = fopen($my_file,'w');
+                fwrite($handle, $original_organiser_email . " is happy");
+
+                $email = $host_email;
+                $subject = 'Your event - ' . $event_name . ' is featured on PerthPoint!';
+                $comment = 'Hey there,
+    
+We wanted to let you know that your new event - ' . $event_name . ' - has been added to our website!
+    
+View it here:' . $event_page . '
+    
+Join us today on www.perthpoint.com.au/host-login to edit the event or add more events. It is totally free!
+
+Alternatively, we can take the event down and remove you from future correspondence, just e-mail us back.
+    
+Trisha
+www.perthpoint.com.au
+    
+    ';
+            mail($email, $subject, $comment, "From:" . 'admin@perthpoint.com.au');
+
+            }   
     
     
-    }
+    
     
 
 
