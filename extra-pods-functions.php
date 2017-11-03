@@ -231,7 +231,7 @@ We wanted to let you know that your new event - ' . $event_name . ' - has been c
     
 View it here:' . $event_page . '
     
-Join us today on www.perthpoint.com.au/host-login to edit the event or add more events. It is totally free!
+Join us today on www.perthpoint.com.au/host-signup to edit the event or add more events. It is totally free!
 
 Feel free to contact us on this address if you are unhappy for any reason.
     
