@@ -223,7 +223,7 @@ www.perthpoint.com.au
             if ($original_organiser_email){
                 //send an e-mail the event organizer encouraging them to join PerthPoint
 
-                $email = $host_email;
+                $email = $original_organiser_email;
                 $subject = 'Your event - ' . $event_name . ' is featured on PerthPoint!';
                 $comment = 'Hey there,
     
