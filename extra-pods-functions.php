@@ -332,6 +332,11 @@ function lowgravity_geo_pre_save($pieces, $is_new) {
  $formatted_address = $json_obj->results[0]->formatted_address;
  } 
  
+ if (!$formatted_address){
+    
+   $formatted_address = $pieces['fields'][$address_field_name]['value'];
+ }
+
  $pieces['fields'][$coordinates_field_name]['value'] = $coordinates;
  $pieces['fields'][$address_field_name]['value'] = $formatted_address;
  
