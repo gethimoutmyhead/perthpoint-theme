@@ -1,6 +1,19 @@
 <?php
 //extra pods functions
 
+//add custom JS functions
+function add_custom_script() {
+    wp_register_script('google_maps_api', 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDWnGVLjU3bQ1FS24kR_wBKCMN2d2o3ltI&outputFormat=JSON', array( 'jquery' ));
+    wp_enqueue_script('google_maps_api');
+
+
+    wp_register_script('custom_script', get_template_directory_uri(). '/js/custom-functions.js', array( 'jquery' ));
+    wp_enqueue_script('custom_script');
+}  
+
+add_action( 'wp_enqueue_scripts', 'add_custom_script' );
+  
+
 
 function my_long_date($input_date) {
      return date("l, jS F Y", strtotime($input_date));     
@@ -159,6 +172,8 @@ function findTodayAndLater( $params, $pod ) {
 	}
 	return $params;
 }
+
+
 // add google geocoding API
 
 //add filters for events, regular weekly events, and hosts
