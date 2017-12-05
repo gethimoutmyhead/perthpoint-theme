@@ -16,6 +16,15 @@ jQuery(document).ready(function(){
 		});
 
 	};
+	var hostAddressBar = document.getElementById('pods-form-ui-pods-field-location');
+	if (hostAddressBar){
+		var autocomplete = new google.maps.places.Autocomplete (hostAddressBar);
+	}
+	var eventAddressBar = document.getElementById('pods-form-ui-pods-meta-location');
+	if (eventAddressBar){
+		var autocomplete = new google.maps.places.Autocomplete (eventAddressBar);
+	}
+	
 	//$('#searchForm').submit(function (){
 		//getAddress();
 		//return false;

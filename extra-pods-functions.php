@@ -182,7 +182,7 @@ add_filter('pods_api_post_save_pod_item_host','add_feature_image',10,2);
 add_filter('pods_api_pre_save_pod_item_event','lowgravity_geo_pre_save',10,2);
 add_filter('pods_api_pre_save_pod_item_regular','lowgravity_geo_pre_save',10,2);
 
-add_action('pods_api_post_save_pod_item_event','approve_event_email',10,2);
+add_action('pods_api_post_save_pod_item_event','approve_event_email',10,3);
 
 add_filter('pods_form_ui_field_text', 'lowgravity_disable_coordinates_field', 10, 6);
 
@@ -196,7 +196,17 @@ function approve_event_email($pieces, $is_new_item, $id){
     $host_email = get_post_meta($host_id, 'e-mail', true);
     
     $event_post_status = get_post_status($id); //$pieces[ 'fields' ][ 'post_status' ];
-    
+    //$pieces['fields']['web_page']['value'] = 'google.com';
+    //pods('event', $id)->save('web_page', 'http://www.yahoo.com');
+    //update_post_meta($id, 'web_page', 'http://www.altavista.com');
+
+    /**
+    $data = array(
+        'web_page' => 'http://www.google.com'
+    );
+    pods('event', $id)->save($data);
+    **/
+
     $original_organiser_email = $pieces['fields']['original_organiser_email']['value'];
     
     //$host_id = 'sizerp';
@@ -221,6 +231,14 @@ function approve_event_email($pieces, $is_new_item, $id){
     **/
     
     if ($event_name){
+        $hets = (string)get_post_meta($id, 'host_emailed_timestamp')[0];
+        $d = DateTime::createFromFormat('Y-m-d H:i:s', $hets );
+
+                
+        $host_emailed_timestamp = $d->getTimeStamp();
+
+        if (($host_emailed_timestamp + 86400) < time() ){  
+            //update_post_meta($id,'description',  'eat my shoesss30' );//test line. to be removed when code works
             $email = $host_email;
             $subject = 'Your event - ' . $event_name . ' is approved for submission on PerthPoint!';
             $comment = 'Hey there,
@@ -234,31 +252,57 @@ www.perthpoint.com.au
     
     ';
             mail($email, $subject, $comment, "From:" . 'admin@perthpoint.com.au');
+
+            update_post_meta($id, 'host_emailed_timestamp', date('y-m-d h:m',time() ) );
+
+
         }
+
+
+
+
+    
             if ($original_organiser_email){
-                //send an e-mail the event organizer encouraging them to join PerthPoint
+                //$original_organiser_email_timestamp_string = (get_post_meta($id, 'original_organiser_email_timestamp')[0]);
+                $ooets = (string)get_post_meta($id, 'original_organiser_email_timestamp')[0];
+                $d = DateTime::createFromFormat('Y-m-d H:i:s', $ooets );
+                
+                $original_organiser_email_timestamp = $d->getTimeStamp();
 
-                $email = $original_organiser_email;
-                $subject = 'Your event - ' . $event_name . ' is featured on PerthPoint!';
-                $comment = 'Hey there,
-    
-We wanted to let you know that your new event - ' . $event_name . ' - has been chosen to feature on our website!
-    
-View it here:' . $event_page . '
-    
-Join us today on www.perthpoint.com.au/host-signup to edit the event or add more events. It is totally free!
+                if (($original_organiser_email_timestamp + 86400) < time() ){
+                    //update_post_meta($id,'description',  'eat my shoesss5' );//test line. to be removed when code works
 
-Feel free to contact us on this address if you are unhappy for any reason.
-    
-Trisha
-www.perthpoint.com.au
-    
-    ';
-            mail($email, $subject, $comment, "From:" . 'admin@perthpoint.com.au');
+                    //send an e-mail to the event organizer encouraging them to join PerthPoint
+                    $email = $original_organiser_email;
+                    $subject = 'Your event - ' . $event_name . ' is featured on PerthPoint!';
+                    $comment = 'Hey there,
+        
+    We wanted to let you know that your new event - ' . $event_name . ' - has been chosen to feature on our website!
+        
+    View it here:' . $event_page . '
+        
+    Join us today on www.perthpoint.com.au/host-signup to edit the event or add more events. It is totally free!
+
+    Feel free to contact us on this address if you are unhappy for any reason.
+        
+    Trisha
+    www.perthpoint.com.au
+        
+        ';
+                    mail($email, $subject, $comment, "From:" . 'admin@perthpoint.com.au');
+                    update_post_meta($id, 'original_organiser_email_timestamp', date('y-m-d h:m',time() ) );
+
+                }
+
+               
+
+
+
+                
 
             }   
     
-    
+    }
     
     
 
