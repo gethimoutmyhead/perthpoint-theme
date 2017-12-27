@@ -20,10 +20,7 @@ jQuery(document).ready(function(){
 	if (hostAddressBar){
 		var autocomplete = new google.maps.places.Autocomplete (hostAddressBar);
 	}
-	var eventAddressBar = document.getElementById('pods-form-ui-pods-meta-location');
-	if (eventAddressBar){
-		var autocomplete = new google.maps.places.Autocomplete (eventAddressBar);
-	}
+
 	
 	//$('#searchForm').submit(function (){
 		//getAddress();
