@@ -25,7 +25,7 @@ get_header();
         echo '<h3> Member name: ' . $_SESSION['Hostname'] . '</h3>';
 
             $eventPod = pods ('event' );
-            $fields = array('event_name', 'ft_image_upload', 'event_date', 'final_date', 'start_time', 'end_time', 'minimum_price', 'maximum_price', 'venue', 'location', 'web_page', 'description');
+            $fields = array('post_title', 'ft_image_upload', 'event_date', 'final_date', 'start_time', 'end_time', 'minimum_price', 'maximum_price', 'venue', 'location', 'web_page', 'description');
             echo $eventPod->form($fields,'Submit', $homeURL . '/add-event-details?eventID=X_ID_X');
         
         

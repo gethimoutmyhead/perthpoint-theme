@@ -22,8 +22,9 @@ get_header();
         $eventPod = pods('event', $eventID);
         if ($eventPod->field('organiser.ID') != $hostID){
             //logged in host does not own this event, re-direct
-            echo 'You are not authorised to edit this event, redirecting';
-            echo '<meta http-equiv="refresh" content="2;url='.$homeURL. '/members-area/"';
+            echo 'You are not authorised to edit this event, redirecting...';
+
+            echo '<meta http-equiv="refresh" content="2;url='.$homeURL. '/members-area/"><br>';
             
         }else{
         echo '<h1> Edit Details </h1><br>';

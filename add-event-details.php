@@ -29,7 +29,7 @@
         
             if (($eventPod->field('organiser.ID') == 0) || $eventPod->field('organiser.ID') == $hostID){
                 $eventPod->save('organiser', $hostID);
-                $eventPod->save('post_title', $postName);
+                //$eventPod->save('post_title', $postName);
                 $eventPod->save('post_content', $description);
                 //$eventPod->save('post_thumbnail', $ft_image);
                 set_post_thumbnail($eventID, $ft_image);
@@ -41,7 +41,7 @@
             $subject = 'A new event has been submitted to PerthPoint!';
             $comment = 'Hey there,
     
-We wanted to let you know that a new event - ' . $eventPod->field('event_name') . ' - has been submitted to our website!
+We wanted to let you know that a new event - ' . $eventPod->field('post_title') . ' - has been submitted to our website!
     
 Please review it for approval.
     
