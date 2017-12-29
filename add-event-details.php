@@ -30,6 +30,12 @@
             if (($eventPod->field('organiser.ID') == 0) || $eventPod->field('organiser.ID') == $hostID){
                 $eventPod->save('organiser', $hostID);
                 //$eventPod->save('post_title', $postName);
+
+                global $wpdb;
+                $eventIDString = (string)$eventID;
+                $postTitle = $eventPod->field('post_title');
+                $results = $wpdb->insert('SoPerthweblog_postmeta', array('meta_value'=>$postTitle,'post_id'=>$eventIDString,'meta_key'=>'event_name'));
+
                 $eventPod->save('post_content', $description);
                 //$eventPod->save('post_thumbnail', $ft_image);
                 set_post_thumbnail($eventID, $ft_image);
